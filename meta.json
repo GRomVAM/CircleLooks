@@ -1,0 +1,16 @@
+{
+  "licenseType": "CC BY-SA",
+  "creatorName": "GRomVAM",
+  "packageName": "CircleLooks",
+  "includeVersionsInReferences": "true",
+  "description": "A highly optimized appearance preset cycler. It allows you to organize your appearance presets into subfolders within 'Saves/Person/Appearance' (e.g., Male, Female). Each folder automatically becomes a separate Lookset collection. Select a target character and seamlessly cycle through looks or switch collections using clean UI buttons or customizable screen-overlay hotkeys without opening menus.",
+  "credits": "Special thanks to MeshedVR for Virt-A-Mate and Acidbubbles for the VSCode plugin template.",
+  "instructions": "1. Put your appearance presets (.json) into subfolders inside 'Saves/Person/Appearance' (each subfolder will act as an individual Lookset).\n2. Add CircleLooks as a Session Plugin.\n3. Select a Target Person in the UI.\n4. Use customizable screen-overlay hotkeys (Default: L for Next Look, K for Prev Look) to cycle presets seamlessly while the UI window is closed.",
+  "promotionalLink": "https://github.com",
+  "programVersion": "1.0.0.0",
+  "contentList": [
+    "Custom\\Scripts\\GRomVAM\\CircleLooks\\CircleLooks.cs"
+  ],
+  "dependencies": {
+  }
+}
