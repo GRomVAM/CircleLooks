@@ -3,9 +3,8 @@
   "creatorName": "GRomVAM",
   "packageName": "CircleLooks",
   "includeVersionsInReferences": "true",
-  "description": "A highly optimized appearance preset cycler. It allows you to organize your appearance presets into subfolders within 'Saves/Person/Appearance' (e.g., Male, Female). Each folder automatically becomes a separate Lookset collection. Select a target character and seamlessly cycle through looks or switch collections using clean UI buttons or customizable screen-overlay hotkeys without opening menus.",
-  "credits": "Special thanks to MeshedVR for Virt-A-Mate and Acidbubbles for the VSCode plugin template.",
-  "instructions": "1. Put your appearance presets (.json) into subfolders inside 'Saves/Person/Appearance' (each subfolder will act as an individual Lookset).\n2. Add CircleLooks as a Session Plugin.\n3. Select a Target Person in the UI.\n4. Use customizable screen-overlay hotkeys (Default: L for Next Look, K for Prev Look) to cycle presets seamlessly while the UI window is closed.",
+  "description": "An easy-to-use appearance preset switcher for Virt-A-Mate (Desktop and VR). Organize your character appearances into subfolders within 'Saves/Person/appearance' (e.g., Male, Female). Each folder automatically becomes a separate Lookset collection. Select a target character and smoothly cycle through looks or switch collections using UI buttons or customizable hotkeys while keeping your character's scene name and links intact.",
+  "instructions": "1. Place your saved appearance presets into subfolders inside 'Saves/Person/appearance' (each subfolder acts as a separate Lookset).\n2. Open Main Menu -> Session Plugins, click Add Plugin, and load CircleLooks.cs.\n3. Click 'Save As Default' so the plugin automatically loads into every scene.\n4. Select a Target Person and use UI buttons or hotkeys (Default: L for Next Look, K for Prev Look, O for Cycle Lookset, P for Cycle Person).",
   "promotionalLink": "https://github.com/GRomVAM/CircleLooks",
   "programVersion": "1.0.0.0",
   "contentList": [

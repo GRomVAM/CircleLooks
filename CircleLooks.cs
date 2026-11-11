@@ -53,8 +53,8 @@ namespace CircleLooks
 
                 _makeUI();
 
-                //RefreshScenePersonsData();
-                //RefreshLooksetsData();
+                RefreshScenePersonsData();
+                RefreshLooksetsData();
 
                 SuperController.singleton.onSceneLoadedHandlers += OnSceneLoaded;
 
@@ -207,14 +207,16 @@ namespace CircleLooks
                 {
                     _personChooser.choices = new List<string>();
                     _personChooser.valNoCallback = "";
-                    //_uiHelper.OutMessage("RefreshScenePersonsData() No Person atoms found on scene.");
+                    _uiHelper.OutMessage("No Person atoms found on scene.", true);
                     return;
                 }
                 var choicesList1 = new List<string>(persons1);
                 _personChooser.choices = choicesList1;
                 if (string.IsNullOrEmpty(_personChooser.val) || !choicesList1.Contains(_personChooser.val))
+                {
+                    _uiHelper.OutMessage($"Successfully found {choicesList1.Count} persons.", true);
                     _personChooser.val = choicesList1[0];
-                //_uiHelper.OutMessage($"RefreshScenePersonsData() Successfully cached {choicesList1.Count} persons.");
+                }
             }
             catch (Exception e)
             {
@@ -236,7 +238,7 @@ namespace CircleLooks
                 var folders1 = SuppVamIO.GetAllLooksets();
                 if (folders1 == null || folders1.Length == 0)
                 {
-                    _uiHelper.OutMessage("RefreshLooksetsData() No lookset folders found in Saves/Person/appearance");
+                    _uiHelper.OutMessage("No lookset folders found in Saves/Person/appearance", true);
                     return;
                 }
 
@@ -262,9 +264,10 @@ namespace CircleLooks
                 _looksetChooser.choices = looksetChoices1;
                 if (looksetChoices1.Count > 0
                     && (string.IsNullOrEmpty(_looksetChooser.val) || !looksetChoices1.Contains(_looksetChooser.val)))
+                {
+                    _uiHelper.OutMessage($"Successfully found {_looksetMap.Count} looksets.", true);
                     _looksetChooser.val = looksetChoices1[0];
-
-                //_uiHelper.OutMessage($"RefreshLooksetsData() Successfully scanned {_looksetMap.Count} lookset collections.");
+                }
             }
             catch (Exception e)
             {
@@ -484,7 +487,7 @@ namespace CircleLooks
                 var person1 = SuppVamAtom.FindAtomByUid(uid1);
                 if (person1 == null)
                 {
-                    _uiHelper.OutError($"_applyLook() failed: Character '{uid1}' not found on scene.");
+                    _uiHelper.OutError($"_applyLook() failed: Character '{uid1}' not found on scene.", true, Color.red);
                     return;
                 }
 
@@ -494,8 +497,8 @@ namespace CircleLooks
                 _lockedPersonUid = person1.uid;
 
                 // Trigger the official asynchronous VaM method to apply the appearance to the character
-                person1.LoadAppearancePreset(look1);
-                _uiHelper.OutMessage($"[{lookset1.CurrentIndex + 1}/{lookset1.Count}] Applied look '{look1}' to '{uid1}'");
+                _uiHelper.OutMessage($"{lookset1.Name} : {lookset1.CurrentIndex + 1}", true);
+                person1.LoadAppearancePreset(look1);                
 
                 // Immediately start the background coroutine to monitor the engine loading status
                 StartCoroutine(WaitForLookLoadRoutine());
@@ -770,7 +773,8 @@ namespace CircleLooks
 
 
         /// <summary>
-        /// Activates the 3D overlay canvas, resets text opacity, and displays the specified message string.
+        /// Activates the 3D overlay canvas, resets text opacity and timer, and either sets the specified message
+        /// or appends it as a new line below the currently visible text.
         /// </summary>
         /// <param name="message">The text string to render on the overlay.</param>
         /// <param name="textColor">Optional text color (uses <see cref="DEFAULT_COLOR"/> if null).</param>
@@ -780,15 +784,23 @@ namespace CircleLooks
             Color? textColor = null,
             float? delay = null)
         {
-            if (_msgOverlayText != null && _msgOverlayGO != null)
-            {
+            if (_msgOverlayText == null || _msgOverlayGO == null)
+                return;
+
+            var targetCam1 = SuperController.singleton.lookCamera ?? SuperController.singleton.MonitorCenterCamera;
+            if (targetCam1 != null && _msgOverlayGO.transform.parent != targetCam1.transform)
+                _msgOverlayGO.transform.SetParent(targetCam1.transform, false);
+
+            if (_msgOverlayGO.activeSelf && _msgOverlayTimer > 0f && !string.IsNullOrEmpty(_msgOverlayText.text))
+                _msgOverlayText.text += $"\n{message}";
+            else
                 _msgOverlayText.text = message;
-                var color1 = textColor ?? DEFAULT_COLOR;
-                color1.a = DEFAULT_ALPHA;
-                _msgOverlayText.color = color1;
-                _msgOverlayGO.SetActive(true);
-                _msgOverlayTimer = delay ?? DEFAULT_DELAY;
-            }
+
+            var color1 = textColor ?? DEFAULT_COLOR;
+            color1.a = DEFAULT_ALPHA;
+            _msgOverlayText.color = color1;
+            _msgOverlayGO.SetActive(true);
+            _msgOverlayTimer = delay ?? DEFAULT_DELAY;
         }
 
 
@@ -821,28 +833,33 @@ namespace CircleLooks
         private void _makeMessageOverlay()
         {
             _msgOverlayGO = new GameObject("UIHelper_MessageOverlay");
-            if (SuperController.singleton.MonitorCenterCamera != null)
-                _msgOverlayGO.transform.SetParent(
-                    SuperController.singleton.MonitorCenterCamera.transform, false);
-            _msgOverlayGO.transform.localPosition = new Vector3(0f, 0f, 1f);
+            var targetCam1 = SuperController.singleton.lookCamera ?? SuperController.singleton.MonitorCenterCamera;
+            if (targetCam1 != null)
+                _msgOverlayGO.transform.SetParent(targetCam1.transform, false);
+
+            _msgOverlayGO.transform.localPosition = new Vector3(0f, 0f, 1.5f);
             var canvas1 = _msgOverlayGO.AddComponent<Canvas>();
             canvas1.renderMode = RenderMode.WorldSpace;
             _msgOverlayGO.AddComponent<CanvasScaler>().dynamicPixelsPerUnit = 100;
+
             var canvasRect1 = _msgOverlayGO.GetComponent<RectTransform>();
-            canvasRect1.sizeDelta = new Vector2(800f, 200f);
-            canvasRect1.localScale = new Vector3(0.003f, 0.003f, 0.003f);
+            canvasRect1.sizeDelta = new Vector2(800f, 300f);
+            canvasRect1.localScale = new Vector3(0.004f, 0.004f, 0.004f);
+
             var text1 = new GameObject("UIHelper_MessageOverlay_Text");
             text1.transform.SetParent(_msgOverlayGO.transform, false);
             _msgOverlayText = text1.AddComponent<UnityEngine.UI.Text>();
             _msgOverlayText.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
             _msgOverlayText.fontSize = 32;
             _msgOverlayText.alignment = TextAnchor.MiddleCenter;
+
             var color1 = DEFAULT_COLOR;
             color1.a = DEFAULT_ALPHA;
             _msgOverlayText.color = color1;
+
             var textRect1 = text1.GetComponent<RectTransform>();
             textRect1.anchoredPosition = Vector2.zero;
-            textRect1.sizeDelta = new Vector2(800f, 200f);
+            textRect1.sizeDelta = new Vector2(800f, 300f);
             _msgOverlayGO.SetActive(false);
         }
 

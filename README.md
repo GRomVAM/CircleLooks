@@ -1,53 +1,57 @@
 # CircleLooks for Virt-A-Mate
 
-Performance-optimized appearance preset cycler for Virt-A-Mate (VaM).
+An easy-to-use appearance preset switcher for Virt-A-Mate (VaM).
 
-This plugin allows you to organize character appearances into separate folder collections (Looksets) and cycle through them or switch between target characters using responsive screen-overlay hotkeys, completely independent of the VaM UI window.
+This plugin lets you organize your character appearances into separate folders (Looksets) and smoothly cycle through them or switch between characters using UI buttons or keyboard hotkeys.
 
 ---
 
 ## Key Features
 
-* **Folder-Based Collections (Looksets):** Automatically groups .json appearance presets based on the subfolders they are placed in.
-* **On-Screen Helper Overlay:** Auto-fading text alerts pop up directly in the simulation space when cycling via hotkeys, keeping you informed even when all menus are hidden.
-* **Smart Performance Optimization:** No heavy background disk scanning or frame drops during normal gameplay. Directories are scanned cleanly upon initialization or manual refresh.
-* **Closing UI Freedom:** Designed specifically for players who prefer to cycle looks using hotkeys without keeping the Session Plugins window open.
+* **Folder-Based Collections (Looksets):** Automatically turns your appearance subfolders into ready-to-use collections.
+* **Safe Character Switching:** Keeps your character's name intact when loading new appearances, ensuring your scene setup and animations stay unbroken.
+* **Trigger Support:** All cycling actions can be bound to in-game buttons.
 
 ---
 
-## How It Works (The Concept)
+## How to Organize Your Looks
 
-You can organize your look presets into folders inside the standard VaM directory:
-Saves/Person/Appearance/
+Place your saved appearance presets into subfolders inside your standard Virt-A-Mate appearance folder:
+`Saves/Person/appearance/`
 
-Each top-level subfolder automatically becomes an individual Lookset collection available for rotation. For example:
-* Saves/Person/Appearance/Female/ -> Will act as the "Female" lookset collection.
-* Saves/Person/Appearance/Male/ -> Will act as the "Male" lookset collection.
-* Saves/Person/Appearance/Cyberpunk/ -> Will act as the "Cyberpunk" lookset collection.
-
----
-
-## Installation and Setup
-
-1. Download the latest .var package from releases or compile the script locally.
-2. Ensure the script is located under: Custom/Scripts/GRomVAM/CircleLooks/CircleLooks.cs
-3. Launch Virt-A-Mate.
-4. Add CircleLooks to your Session Plugins list.
+Each subfolder automatically appears in the plugin as a separate Lookset with the total number of looks shown next to its name:
+* `Saves/Person/appearance/Female/` → **Female (12)**
+* `Saves/Person/appearance/Male/` → **Male (8)**
+* `Saves/Person/appearance/Cyberpunk/` → **Cyberpunk (15)**
 
 ---
 
-## Controls and Hotkeys
+## Installation
 
-The user interface is split into a Management and Setup Panel (left side) and a Customizable Hotkeys Setup Panel (right side).
+1. Place the `.var` file into your Virt-A-Mate `AddonPackages` folder.
+2. Launch Virt-A-Mate.
+3. Open **Main Menu** → **Session Plugins** and click **Add Plugin**.
+4. Select the `CircleLooks` `.var` package and load the script.
+5. Click **Save As Default** in the Session Plugins tab so the plugin automatically loads into every scene you open.
 
-| Action | Default Keyboard Key | Description |
+---
+
+## User Interface & Controls
+
+* **Target Person:** Dropdown menu to select which character in the scene will receive the new look.
+* **Refresh Scene Persons:** Updates the character list if you added or removed characters in the scene.
+* **Active Lookset:** Dropdown menu to choose which folder collection you want to browse.
+* **Refresh Looksets:** Rescans your appearance folders if you added new presets while the game is running.
+* **Next Look / Prev Look:** Buttons to manually step forward or backward through the active collection.
+
+You can customize or disable (`None`) any hotkey using the dropdown menus on the right side of the plugin UI:
+
+| Action | Default Key | What It Does |
 | :--- | :---: | :--- |
-| **Next Look** | L | Cycles to the next appearance preset in the active folder. |
-| **Prev Look** | K | Cycles to the previous appearance preset in the active folder. |
-| **Next Lookset** | O | Switches to the next available folder collection. |
-| **Next Person** | P | Switches to the next Person atom found in the scene. |
-
-Note: Hotkeys can be fully customized or disabled (None) directly from the plugin's UI panel.
+| **Next Look** | `L` | Applies the next look from the active folder to the selected character. |
+| **Prev Look** | `K` | Applies the previous look from the active folder to the selected character. |
+| **Cycle Lookset** | `O` | Switches to the next available folder collection. |
+| **Cycle Person** | `P` | Switches the target selection to the next character in the scene. |
 
 ---
 

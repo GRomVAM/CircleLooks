@@ -71,7 +71,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="~docs.cs.txt" />
     <Compile Include="CircleLooks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -80,6 +79,11 @@
     <None Include="LICENSE.md" />
     <None Include="meta.json" />
     <None Include="README.md" />
+    <None Include="vam\Overview.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="vam\001.png" />
+    <Content Include="vam\Thumbnail.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
