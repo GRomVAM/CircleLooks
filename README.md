@@ -1,61 +1,64 @@
-# CircleLooks for Virt-A-Mate
+# CircleLooks
 
-An easy-to-use appearance preset switcher for Virt-A-Mate (VaM).
-
-This plugin lets you organize your character appearances into separate folders (Looksets) and smoothly cycle through them or switch between characters using UI buttons or keyboard hotkeys.
-
----
+**CircleLooks** is a lightweight utility plugin for **Virt-A-Mate (VaM)** that allows you to organize `.vap` appearance presets into subfolder collections (**Looksets**) and seamlessly cycle through them on any `Person` atom in a scene—without breaking scene logic, animations, physics, or triggers.
 
 ## Key Features
 
-* **Folder-Based Collections (Looksets):** Automatically turns your appearance subfolders into ready-to-use collections.
-* **Safe Character Switching:** Keeps your character's name intact when loading new appearances, ensuring your scene setup and animations stay unbroken.
-* **Trigger Support:** All cycling actions can be bound to in-game buttons.
+* **Folder-Based Looksets:** Automatically scans top-level subfolders inside `Custom/Atom/Person/Appearance/` and treats each folder as an independent lookset collection.
+* **Non-Destructive Switching:** Uses VaM's native `AppearancePresets` (`LoadPresetWithPath`) to swap character appearance, hair, and clothing while keeping poses, animations, timelines, and scene triggers intact.
+* **Gallery-Style Navigation:** Cycle forward and backward through looks cleanly without double-step delays when reversing direction.
+* **Visual Target Feedback:** Briefly blinks the selected `Person` atom in the 3D scene (`tempDisableRender`) so you always know which character is active.
+* **3D Screen Overlay:** Displays unobtrusive, auto-fading status notifications directly in your field of view (Desktop & VR compatible).
+* **Full Trigger & Hotkey Support:** Control everything via UI buttons, customizable keyboard shortcuts, or native VaM triggers.
 
----
+## Folder Structure Setup
 
-## How to Organize Your Looks
+Organize your `.vap` appearance presets into subfolders inside your VaM installation directory:
 
-Place your saved appearance presets into subfolders inside your standard Virt-A-Mate appearance folder:
-`Saves/Person/appearance/`
+```text
+VaM/
+└── Custom/
+    └── Atom/
+        └── Person/
+            └── Appearance/
+                ├── Casual/
+                │   ├── Preset_Anna.vap
+                │   └── Preset_Kate.vap
+                ├── SciFi/
+                │   └── Preset_Nova.vap
+                └── Evening/
+                    └── Preset_Bella.vap
+```
 
-Each subfolder automatically appears in the plugin as a separate Lookset with the total number of looks shown next to its name:
-* `Saves/Person/appearance/Female/` → **Female (12)**
-* `Saves/Person/appearance/Male/` → **Male (8)**
-* `Saves/Person/appearance/Cyberpunk/` → **Cyberpunk (15)**
+> **Tip:** Save your character looks using the **Appearance Presets** tab (`Create New Preset`) rather than full `Atom Presets` so they remain compatible with any scene.
 
----
+## Installation & Setup
 
-## Installation
+### Option 1: Session Plugin (Recommended)
+1. Download the latest `.var` package (`GRomVAM.CircleLooks.X.var`) and place it into your `AddonPackages/` folder.
+2. Open **Main Menu → Session Plugins** and click **Add Plugin**.
+3. Select the **`CircleLooks`** `.var` package and load **`CircleLooks.cslist`**.
+4. Click **Save As Default** in the **Session Plugins** tab so the plugin automatically loads into every scene you open.
 
-1. Place the `.var` file into your Virt-A-Mate `AddonPackages` folder.
-2. Launch Virt-A-Mate.
-3. Open **Main Menu** → **Session Plugins** and click **Add Plugin**.
-4. Select the `CircleLooks` `.var` package and load the script.
-5. Click **Save As Default** in the Session Plugins tab so the plugin automatically loads into every scene you open.
+### Option 2: Scene / Atom Plugin
+1. Open **Scene Plugins** (or select any atom's **Plugins** tab) and click **Add Plugin**.
+2. Select **`CircleLooks.cslist`** from the package (important: select the `.cslist` file, not individual `.cs` files).
+3. Choose an **Active Lookset** and a **Target Person** from the dropdown menus, then start cycling looks using the UI buttons, hotkeys, or VaM triggers.
 
----
 
-## User Interface & Controls
+## Default Hotkeys & Trigger Actions
 
-* **Target Person:** Dropdown menu to select which character in the scene will receive the new look.
-* **Refresh Scene Persons:** Updates the character list if you added or removed characters in the scene.
-* **Active Lookset:** Dropdown menu to choose which folder collection you want to browse.
-* **Refresh Looksets:** Rescans your appearance folders if you added new presets while the game is running.
-* **Next Look / Prev Look:** Buttons to manually step forward or backward through the active collection.
+Hotkeys are automatically ignored while typing inside any UI input field. You can rebind or disable (`None`) any key in the plugin UI.
 
-You can customize or disable (`None`) any hotkey using the dropdown menus on the right side of the plugin UI:
+| Action | Default Key | Trigger Action Name | Description |
+| :--- | :---: | :--- | :--- |
+| **Next Look** | `L` | `NextLook` | Applies the next appearance preset in the active lookset. |
+| **Prev Look** | `K` | `PrevLook` | Applies the previous appearance preset in the active lookset. |
+| **Cycle Lookset** | `O` | `CycleLookset` | Switches to the next lookset folder. |
+| **Cycle Person** | `P` | `CyclePersons` | Switches to the next `Person` atom in the scene. |
 
-| Action | Default Key | What It Does |
-| :--- | :---: | :--- |
-| **Next Look** | `L` | Applies the next look from the active folder to the selected character. |
-| **Prev Look** | `K` | Applies the previous look from the active folder to the selected character. |
-| **Cycle Lookset** | `O` | Switches to the next available folder collection. |
-| **Cycle Person** | `P` | Switches the target selection to the next character in the scene. |
+## Credits & License
 
----
-
-## License and Credits
-
+* **Author:** [GRomVAM](https://github.com/GRomVAM)
+* **Special Thanks:** [atani](https://hub.virtamate.com/members/atani.6611) for valuable advice and helpful recommendations during development.
 * **License:** Distributed under the Creative Commons Attribution-ShareAlike (CC BY-SA) license.
-* **Credits:** Special thanks to MeshedVR for Virt-A-Mate and Acidbubbles for the project setup template.

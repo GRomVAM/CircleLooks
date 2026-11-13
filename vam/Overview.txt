@@ -1,0 +1,61 @@
+[B]CircleLooks[/B] is a lightweight utility plugin for [B]Virt-A-Mate[/B] designed to organize your [I].vap[/I] appearance presets into folder-based collections ([B]Looksets[/B]) and cycle through them on any [B]Person[/B] atom in a scene—without breaking poses, animations, timelines, or scene triggers.
+
+
+[HEADING=2]Key Features[/HEADING]
+[LIST]
+[*][B]Folder-Based Looksets:[/B] Automatically scans top-level subfolders inside [I]Custom/Atom/Person/Appearance/[/I] and groups presets into clean collections with preset counters.
+[*][B]Scene-Safe Switching:[/B] Applies presets natively through [I]AppearancePresets[/I] ([I]LoadPresetWithPath[/I]), leaving scene logic, IK targets, and animations untouched.
+[*][B]Gallery-Style Navigation:[/B] Smoothly step forward and backward through your looks with zero step-skipping when changing direction.
+[*][B]Visual Target Highlight:[/B] Briefly blinks the selected character in the 3D view so you can immediately see which [B]Person[/B] atom is targeted in multi-character scenes.
+[*][B]3D HUD Overlay:[/B] Displays clean, auto-fading status notifications directly in your view (works in both Desktop and VR).
+[*][B]Hotkeys & VaM Triggers:[/B] Full support for rebindable keyboard shortcuts and native VaM trigger actions.
+[/LIST]
+
+
+[HEADING=2]How to Organize Your Looks[/HEADING]
+Create subfolders inside [I]Custom/Atom/Person/Appearance/[/I] and place your saved [I].vap[/I] appearance presets inside them:
+[CODE]
+Custom/Atom/Person/Appearance/
+  ├── Casual/
+  │     ├── Preset_Anna.vap
+  │     └── Preset_Kate.vap
+  └── SciFi/
+        └── Preset_Nova.vap
+[/CODE]
+[I]Note: Make sure to save your presets from the [B]Appearance Presets[/B] tab rather than full Atom Presets.[/I]
+
+
+[HEADING=2]Installation & Setup[/HEADING]
+
+[B]Option 1: Session Plugin (Recommended)[/B]
+[LIST=1]
+[*]Place the [I].var[/I] file into your [I]AddonPackages[/I] folder.
+[*]Open [B]Main Menu → Session Plugins[/B] and click [B]Add Plugin[/B].
+[*]Select the [B]CircleLooks[/B] [I].var[/I] package and load [B]CircleLooks.cslist[/B].
+[*]Click [B]Save As Default[/B] in the [B]Session Plugins[/B] tab so the plugin automatically loads into every scene you open.
+[/LIST]
+
+[B]Option 2: Scene / Atom Plugin[/B]
+[LIST=1]
+[*]Open [B]Scene Plugins[/B] (or the [B]Plugins[/B] tab on any atom) and click [B]Add Plugin[/B].
+[*]Select [B]CircleLooks.cslist[/B] from the package.
+[*]Pick an [B]Active Lookset[/B] and a [B]Target Person[/B] from the dropdowns, then start cycling!
+[/LIST]
+
+
+[HEADING=2]Hotkeys & Trigger Actions[/HEADING]
+All hotkeys can be customized or disabled ([I]None[/I]) in the plugin UI, and are automatically ignored while typing in text fields:
+[LIST]
+[*][B]Next Look[/B] — Default Key: [B]L[/B] | Trigger Action: [I]NextLook[/I]
+[*][B]Prev Look[/B] — Default Key: [B]K[/B] | Trigger Action: [I]PrevLook[/I]
+[*][B]Cycle Lookset[/B] — Default Key: [B]O[/B] | Trigger Action: [I]CycleLookset[/I]
+[*][B]Cycle Person[/B] — Default Key: [B]P[/B] | Trigger Action: [I]CyclePersons[/I]
+[/LIST]
+
+
+[HEADING=2]Credits & License[/HEADING]
+[LIST]
+[*][B]Created by:[/B] GRomVAM ([URL='https://github.com/GRomVAM/CircleLooks']GitHub Repository[/URL])
+[*][B]Special Thanks:[/B] [URL='https://hub.virtamate.com/members/atani.6611']atani[/URL] for valuable advice and helpful recommendations!
+[*][B]License:[/B] Distributed under the Creative Commons Attribution-ShareAlike (CC BY-SA) license.
+[/LIST]

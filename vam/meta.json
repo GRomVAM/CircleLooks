@@ -1,0 +1,24 @@
+{
+  "licenseType": "CC BY-SA",
+  "creatorName": "GRomVAM",
+  "packageName": "CircleLooks",
+  "standardReferenceVersionOption": "Latest",
+  "scriptReferenceVersionOption": "Exact",
+  "description": "CircleLooks is a lightweight Virt-A-Mate utility plugin that allows you to organize .vap appearance presets into subfolder collections (Looksets) and seamlessly cycle through them on any Person atom in the scene without breaking scene logic, animations, or triggers.",
+  "credits": "Developed by GRomVAM. Special thanks to atani (https://hub.virtamate.com/members/atani.6611) for valuable advice and helpful recommendations.",
+  "instructions": "1. Create subfolders inside Custom/Atom/Person/Appearance/ (e.g., Females, Casual, SciFi) and place your .vap appearance presets inside them.\n2. Add CircleLooks.cslist as a Scene Plugin (or onto any atom).\n3. Select an Active Lookset and Target Person from the dropdown menus (the selected character will briefly blink to confirm selection).\n4. Use the UI buttons, configurable hotkeys (default: L = Next Look, K = Prev Look, O = Cycle Lookset, P = Cycle Person), or VaM Triggers (NextLook, PrevLook, CycleLookset, CyclePersons) to switch looks on the fly.",
+  "promotionalLink": "https://github.com/GRomVAM/CircleLooks",
+  "programVersion": "1.22.0.13",
+  "contentList": [
+    "Custom/Scripts/GRomVAM/CircleLooks/CircleLooks.cs",
+    "Custom/Scripts/GRomVAM/CircleLooks/meta.json"
+  ],
+  "dependencies": {
+  },
+  "customOptions": {
+    "preloadMorphs": "false"
+  },
+  "hadReferenceIssues": "false",
+  "referenceIssues": [
+  ]
+}
