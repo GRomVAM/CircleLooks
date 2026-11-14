@@ -74,9 +74,14 @@ namespace GRomVAM
         public bool TestActivedInputField()
         {
             var eventSystem1 = UnityEngine.EventSystems.EventSystem.current;
-            if (eventSystem1?.currentSelectedGameObject?.GetComponent<UnityEngine.UI.InputField>() != null)
-                return true;
-            return false;
+            if (eventSystem1 == null)
+                return false;
+
+            var selectedGO1 = eventSystem1.currentSelectedGameObject;
+            if (selectedGO1 == null)
+                return false;
+
+            return selectedGO1.GetComponent<UnityEngine.UI.InputField>() != null;
         }
 
 
